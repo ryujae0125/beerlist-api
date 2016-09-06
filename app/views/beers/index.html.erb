@@ -1,0 +1,39 @@
+<div ng-app="app">
+  <div ng-controller="beerCtrl">
+    <h2> {{message}}</h2>
+    <ul>
+      <li ng-repeat="errors in errors"> {{error}} </li>
+    </ul>
+    <datalist id="names">
+      <option ng-repeat="beer in beers">{{ beer.name }}</option>
+    </datalist>
+
+    <input type="text" ng-model="filterName">
+    <input type="text" ng-model="filterStyle">
+    <button type="button" name="button" ng-click="toggleOrder('name')"> Order by Name </button>
+    <button type="button" name="button" ng-click="toggleOrder('style')"> Order by Style </button>
+    <input type="text" ng-model="filterName" list="names">  
+    <div ng-repeat="beer in beers | filter: {style: filterStyle} | orderBy:orderAttribute">
+
+      <ul>
+        <h4> {{ beer.name }} </h4>
+        <li> {{ beer.style }} </li>
+        <li> {{ beer.malts }} </li>
+        <li> {{ beer.yeast }} </li>
+        <li> {{ beer.hop }} </li>
+        <li> {{ beer.ibu}} </li>
+        <li> {{ beer.alcohol }} </li>
+        <button ng-click="delBeer(beer)">Delete</button>
+
+      </ul>
+      Name: <input type="text" placeholder="Name" ng-model="beer.name">
+      Style: <input type="text" placeholder="Style" ng-model="beer.style">
+      Malts: <input type="text" placeholder="Malts" ng-model="beer.malts">
+      Hop: <input type="text" placeholder="Hop" ng-model="beer.hop">
+      Yeast: <input type="text" placeholder="Yeast" ng-model="beer.yeast">
+      Ibu: <input type="text" placeholder="Ibu" ng-model="beer.ibu">
+      Alcohol: <input type="text" placeholder="Alcohol" ng-model="beer.alcohol">
+      <button ng-click="addBeer(beer)">Add a beer</button>
+
+    </div>
+  </div>
